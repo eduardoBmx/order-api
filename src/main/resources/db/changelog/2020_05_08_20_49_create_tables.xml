@@ -1,0 +1,120 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!-- generated changelog according this link http://www.liquibase.org/documentation/generating_changelogs.html -->
+    <changeSet author="eduardo" id="2020-05-05-7-42">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product"/>
+                <tableExists tableName="client"/>
+                <tableExists tableName="address"/>
+                <tableExists tableName="product_order"/>
+                <tableExists tableName="item"/>
+            </not>
+        </preConditions>
+        <createTable tableName="product">
+
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="product_pkey"/>
+            </column>
+
+            <column name="name" type="VARCHAR(255)"/>
+
+            <column name="price" type="MONEY"/>
+
+            <column name="weight_type" type="VARCHAR(255)"/>
+
+        </createTable>
+
+        <createTable tableName="address">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="address_pkey"/>
+            </column>
+
+            <column name="street" type="VARCHAR(255)"/>
+            <column name="district" type="VARCHAR(255)"/>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="number" type="VARCHAR(255)"/>
+            <column name="cep" type="VARCHAR(255)"/>
+            <column name="complement" type="VARCHAR(255)"/>
+
+        </createTable>
+
+        <createTable tableName="client">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="client_pkey"/>
+            </column>
+
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="phone_number" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="true" referencedColumnNames="id" referencedTableName="address"
+                             foreignKeyName="address_id_client_fk"/>
+            </column>
+
+        </createTable>
+
+        <createTable tableName="product_order">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="product_order_pkey"/>
+            </column>
+
+            <column name="client_id" type="BIGINT">
+                <constraints nullable="true" referencedColumnNames="id" referencedTableName="client"
+                             foreignKeyName="client_id_product_order_fk"/>
+            </column>
+
+        </createTable>
+
+        <createTable tableName="item">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="item_pkey"/>
+            </column>
+
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="true" referencedColumnNames="id" referencedTableName="product"
+                             foreignKeyName="product_id_item_fk"/>
+            </column>
+            <column name="product_order_id" type="BIGINT">
+                <constraints nullable="true" referencedColumnNames="id" referencedTableName="product_order"
+                             foreignKeyName="product_order_id_item_fk"/>
+            </column>
+            <column name="quantity" type="INT"/>
+
+        </createTable>
+
+        <createSequence incrementBy="1"
+                        maxValue="999999"
+                        minValue="1"
+                        sequenceName="product_id_seq"
+                        startValue="1"/>
+
+        <createSequence incrementBy="1"
+                        maxValue="999999"
+                        minValue="1"
+                        sequenceName="client_id_seq"
+                        startValue="1"/>
+
+        <createSequence incrementBy="1"
+                        maxValue="999999"
+                        minValue="1"
+                        sequenceName="address_id_seq"
+                        startValue="1"/>
+
+        <createSequence incrementBy="1"
+                        maxValue="999999"
+                        minValue="1"
+                        sequenceName="product_order_id_seq"
+                        startValue="1"/>
+
+        <createSequence incrementBy="1"
+                        maxValue="999999"
+                        minValue="1"
+                        sequenceName="item_id_seq"
+                        startValue="1"/>
+    </changeSet>
+
+</databaseChangeLog>
