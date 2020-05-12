@@ -1,3 +1,3 @@
-# order-api
+# Order Api
 
-= sudo docker-compose up
+sudo docker-compose up
