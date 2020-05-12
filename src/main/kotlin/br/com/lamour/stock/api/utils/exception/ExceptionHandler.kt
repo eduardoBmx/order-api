@@ -21,4 +21,10 @@ class ExceptionHandler {
     fun exceptionHandlerNotFound(e: NotFoundException): Map<String, String> =
         mapOf("Error" to e.message.toString())
 
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(InternalServerError::class)
+    fun exceptionHandlerInternalServerError(): Map<String, String> =
+        mapOf("Error" to "Service Error")
+
 }
