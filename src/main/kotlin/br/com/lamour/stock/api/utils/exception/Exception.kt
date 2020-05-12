@@ -7,3 +7,5 @@ class BadRequestException(
 class NotFoundException(
     msg: String
 ) : RuntimeException(msg)
+
+class InternalServerError(): RuntimeException("Service Error")
