@@ -39,7 +39,7 @@ interface ProductApi {
     ): PaginationProduct
 
     @PutMapping("/{productId}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     fun editProduct(
         @PathVariable("productId") productId: BigInteger,
@@ -47,7 +47,7 @@ interface ProductApi {
     ): ProductResponse
 
     @DeleteMapping("/{productId}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
     fun deleteProduct(
         @PathVariable("productId") productId: BigInteger

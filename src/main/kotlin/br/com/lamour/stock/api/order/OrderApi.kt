@@ -38,7 +38,7 @@ interface OrderApi {
     ): PaginationOrderResponse
 
     @PutMapping("/{orderId}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     fun editProduct(
         @PathVariable("orderId") orderId: BigInteger,
@@ -46,7 +46,7 @@ interface OrderApi {
     ): OrderResponse
 
     @DeleteMapping("/{orderId}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
     fun deleteProduct(
         @PathVariable("orderId") orderId: BigInteger

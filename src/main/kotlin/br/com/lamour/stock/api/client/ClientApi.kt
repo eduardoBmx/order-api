@@ -38,7 +38,7 @@ interface ClientApi {
     ): PaginationClientResponse
 
     @PutMapping("/{clientId}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     fun editProduct(
         @PathVariable("clientId") clientId: BigInteger,
@@ -46,7 +46,7 @@ interface ClientApi {
     ): ClientResponse
 
     @DeleteMapping("/{clientId}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
     fun deleteProduct(
         @PathVariable("clientId") clientId: BigInteger
