@@ -7,6 +7,7 @@ import br.com.lamour.stock.api.utils.exception.NotFoundException
 import br.com.lamour.stock.repository.entity.Product
 import br.com.lamour.stock.repository.repository.product.ProductRepository
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.math.BigInteger
@@ -22,7 +23,7 @@ class ProductServiceImpl(
     override fun listAllProducts(
         page: Int,
         size: Int
-    ): PaginationProduct = productRepository.findAll(PageRequest.of(page -1, size)).toPaginationProduct()
+    ): PaginationProduct = productRepository.findAll(PageRequest.of(page -1, size, Sort.by(Sort.Direction.ASC,"id"))).toPaginationProduct()
 
     override fun deleteProduct(productId: BigInteger) {
         val product = getProductById(productId)

@@ -4,7 +4,6 @@ import br.com.lamour.stock.api.product.request.ProductRequest
 import br.com.lamour.stock.api.product.response.PaginationProduct
 import br.com.lamour.stock.api.product.response.ProductResponse
 import org.springframework.http.HttpStatus
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
