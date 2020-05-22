@@ -26,32 +26,20 @@ class ClientController(
     private val clientService: ClientService
 ): ClientApi {
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
     override fun createClient(
         @Valid @RequestBody clientRequest: ClientRequest
     ): ClientResponse = clientService.createClient(clientRequest)
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     override fun listClients(
         @RequestParam(value = "page", required = true, defaultValue = "1") page: Int,
         @RequestParam(value = "size", required = true, defaultValue = "20") size: Int
     ): PaginationClientResponse = clientService.listClient(page, size)
 
-    @PutMapping("/{clientId}")
-    @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
     override fun editProduct(
         @PathVariable("clientId") clientId: BigInteger,
         @Valid @RequestBody clientRequest: ClientRequest
     ): ClientResponse = clientService.editClient(clientRequest, clientId)
 
-    @DeleteMapping("/{clientId}")
-    @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
     override fun deleteProduct(
         @PathVariable("clientId") clientId: BigInteger
     ) = clientService.deleteClient(clientId)
