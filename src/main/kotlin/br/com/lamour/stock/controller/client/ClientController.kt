@@ -2,6 +2,7 @@ package br.com.lamour.stock.controller.client
 
 import br.com.lamour.stock.api.client.ClientApi
 import br.com.lamour.stock.api.client.request.ClientRequest
+import br.com.lamour.stock.api.client.response.ClientForSelectResponse
 import br.com.lamour.stock.api.client.response.ClientResponse
 import br.com.lamour.stock.api.client.response.PaginationClientResponse
 import br.com.lamour.stock.service.client.ClientService
@@ -43,5 +44,8 @@ class ClientController(
     override fun deleteProduct(
         @PathVariable("clientId") clientId: BigInteger
     ) = clientService.deleteClient(clientId)
+
+    override fun getAllForSelect(
+    ): List<ClientForSelectResponse> = clientService.getForSelect()
 
 }

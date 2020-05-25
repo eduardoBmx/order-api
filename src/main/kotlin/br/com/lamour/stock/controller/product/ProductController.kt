@@ -3,6 +3,7 @@ package br.com.lamour.stock.controller.product
 import br.com.lamour.stock.api.product.ProductApi
 import br.com.lamour.stock.api.product.request.ProductRequest
 import br.com.lamour.stock.api.product.response.PaginationProduct
+import br.com.lamour.stock.api.product.response.ProductForSelectResponse
 import br.com.lamour.stock.api.product.response.ProductResponse
 import br.com.lamour.stock.service.product.ProductService
 import org.springframework.stereotype.Controller
@@ -34,4 +35,6 @@ class ProductController(
     override fun deleteProduct(
         @PathVariable("productId") productId: BigInteger
     ) = productService.deleteProduct(productId)
+
+    override fun getAllForSelect(): List<ProductForSelectResponse>  = productService.getForSelect()
 }

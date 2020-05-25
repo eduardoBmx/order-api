@@ -1,6 +1,7 @@
 package br.com.lamour.stock.api.client
 
 import br.com.lamour.stock.api.client.request.ClientRequest
+import br.com.lamour.stock.api.client.response.ClientForSelectResponse
 import br.com.lamour.stock.api.client.response.ClientResponse
 import br.com.lamour.stock.api.client.response.PaginationClientResponse
 import org.springframework.http.HttpStatus
@@ -51,5 +52,10 @@ interface ClientApi {
     fun deleteProduct(
         @PathVariable("clientId") clientId: BigInteger
     )
+
+    @GetMapping("/select")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    fun getAllForSelect(): List<ClientForSelectResponse>
 
 }

@@ -1,6 +1,7 @@
 package br.com.lamour.stock.service.client
 
 import br.com.lamour.stock.api.client.request.ClientRequest
+import br.com.lamour.stock.api.client.response.ClientForSelectResponse
 import br.com.lamour.stock.api.client.response.ClientResponse
 import br.com.lamour.stock.api.client.response.PaginationClientResponse
 import br.com.lamour.stock.api.utils.exception.NotFoundException
@@ -52,6 +53,10 @@ class ClientServiceImpl(
 
     override fun listClient(page: Int, size: Int): PaginationClientResponse {
         return clientRepository.findAll(PageRequest.of(page - 1, size)).toClientPaginationResponse()
+    }
+
+    override fun getForSelect(): List<ClientForSelectResponse> {
+        return clientRepository.findAll().map { it.toSelectResponse() }
     }
 
     private fun getClient(

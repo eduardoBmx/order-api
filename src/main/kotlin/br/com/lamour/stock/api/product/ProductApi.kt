@@ -2,6 +2,7 @@ package br.com.lamour.stock.api.product
 
 import br.com.lamour.stock.api.product.request.ProductRequest
 import br.com.lamour.stock.api.product.response.PaginationProduct
+import br.com.lamour.stock.api.product.response.ProductForSelectResponse
 import br.com.lamour.stock.api.product.response.ProductResponse
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -51,5 +52,10 @@ interface ProductApi {
     fun deleteProduct(
         @PathVariable("productId") productId: BigInteger
     )
+
+    @GetMapping("/select")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    fun getAllForSelect(): List<ProductForSelectResponse>
 
 }

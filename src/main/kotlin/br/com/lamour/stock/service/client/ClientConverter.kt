@@ -2,6 +2,7 @@ package br.com.lamour.stock.service.client
 
 import br.com.lamour.stock.api.client.response.AddressResponse
 import br.com.lamour.stock.api.client.request.ClientRequest
+import br.com.lamour.stock.api.client.response.ClientForSelectResponse
 import br.com.lamour.stock.api.client.response.ClientResponse
 import br.com.lamour.stock.api.client.response.PaginationClientResponse
 import br.com.lamour.stock.repository.entity.Address
@@ -53,3 +54,8 @@ fun Page<Client>.toClientPaginationResponse(): PaginationClientResponse =
         totalPages = this.totalPages,
         content = this.content.map { it.toResponse() }
     )
+
+fun Client.toSelectResponse() = ClientForSelectResponse(
+    id = this.id,
+    name = this.name
+)
