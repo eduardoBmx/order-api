@@ -5,12 +5,12 @@ import br.com.lamour.stock.api.order.response.OrderResponse
 import br.com.lamour.stock.api.order.response.PaginationOrderResponse
 import br.com.lamour.stock.api.order.response.ProductItemsResponse
 import br.com.lamour.stock.repository.entity.Item
-import br.com.lamour.stock.repository.entity.ProductOrder
 import br.com.lamour.stock.repository.entity.Product
+import br.com.lamour.stock.repository.entity.ProductOrder
 import br.com.lamour.stock.service.client.toResponse
 import br.com.lamour.stock.service.product.toResponse
 import org.springframework.data.domain.Page
-import java.math.BigInteger
+import java.math.BigDecimal
 
 fun OrderRequest.toEntityItems(productOrder: ProductOrder, products: List<Product>): List<Item> {
     return this.productItems.map { item ->
@@ -29,9 +29,21 @@ fun ProductOrder.toResponse(items: List<Item>): OrderResponse = OrderResponse(
         ProductItemsResponse(
             id = it.id!!,
             quantity = it.quantity,
-            product = it.product.toResponse()
-    ) }
+            product = it.product.toResponse(),
+            total = (it.quantity.toBigDecimal() * it.product.price)
+    ) },
+    total = calcTotalItems(items)
 )
+
+private fun calcTotalItems(items: List<Item>): BigDecimal{
+    var total = 0.toBigDecimal()
+
+    items.forEach {
+        total += (it.quantity.toBigDecimal() * it.product.price)
+    }
+
+    return total
+}
 
 fun Page<ProductOrder>.toPaginationResponse(items: List<Item>): PaginationOrderResponse = PaginationOrderResponse(
     content = this.content.map { content -> content.toResponse(items.filter { it.productOrder.id == content.id }) },
