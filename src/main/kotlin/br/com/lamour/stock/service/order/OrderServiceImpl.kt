@@ -42,6 +42,7 @@ class OrderServiceImpl(
     override fun deleteOrder(orderId: BigInteger) {
         val order = getOrder(orderId)
 
+        itemRepository.deleteInBatch(order.items)
         orderRepository.delete(order)
     }
 
