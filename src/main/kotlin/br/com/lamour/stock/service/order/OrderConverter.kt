@@ -27,6 +27,7 @@ fun ProductOrder.toResponse(items: List<Item>): OrderResponse = OrderResponse(
     client = this.client.toResponse(),
     items = items.map {
         ProductItemsResponse(
+            id = it.id!!,
             quantity = it.quantity,
             product = it.product.toResponse()
     ) }

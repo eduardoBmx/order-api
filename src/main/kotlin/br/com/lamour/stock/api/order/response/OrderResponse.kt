@@ -12,6 +12,8 @@ data class OrderResponse(
 
 data class ProductItemsResponse (
 
+    val id: BigInteger,
+
     val quantity: Int,
 
     val product: ProductResponse
