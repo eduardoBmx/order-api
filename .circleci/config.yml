@@ -2,6 +2,8 @@ version: 2.1
 
 orbs:
   maven: circleci/maven@0.0.12
+  codecov: codecov/codecov@1.1.2
+  token: 525993e2-2a8f-44d9-b5c2-9560676cbf18
 
 workflows:
   maven_test:
@@ -21,6 +23,3 @@ jobs:
       - store_artifacts:
           path:  target
 
-env:
-  global:
-    - CODECOV_TOKEN="525993e2-2a8f-44d9-b5c2-9560676cbf18"
