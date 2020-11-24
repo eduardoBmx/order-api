@@ -7,3 +7,7 @@ workflows:
   maven_test:
     jobs:
       - maven/test # checkout, build, test, and upload test results
+
+env:
+  global:
+    - CODECOV_TOKEN="525993e2-2a8f-44d9-b5c2-9560676cbf18"
