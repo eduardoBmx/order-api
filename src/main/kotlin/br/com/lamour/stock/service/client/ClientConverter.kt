@@ -10,18 +10,18 @@ import br.com.lamour.stock.repository.entity.Client
 import org.springframework.data.domain.Page
 
 fun ClientRequest.toAddressEntity(): Address = Address(
-    number = this.address?.number!!,
-    cep = this.address.cep!!,
-    city = this.address.city!!,
+    number = this.address.number,
+    cep = this.address.cep,
+    city = this.address.city,
     complement = this.address.complement,
-    district = this.address.district!!,
-    state = this.address.state!!,
-    street = this.address.street!!
+    district = this.address.district,
+    state = this.address.state,
+    street = this.address.street
 )
 
 fun ClientRequest.toClientEntity(address: Address): Client = Client(
-    name = this.name!!,
-    email = this.email!!,
+    name = this.name,
+    email = this.email,
     phoneNumber = this.phoneNumber,
     address = address
 )

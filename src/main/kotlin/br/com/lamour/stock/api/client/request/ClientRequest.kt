@@ -4,34 +4,34 @@ import javax.validation.constraints.NotNull
 
 data class ClientRequest(
     @field:NotNull
-    val name: String? = null,
+    val name: String,
 
     @field:NotNull
-    val phoneNumber: String? = null,
+    val phoneNumber: String,
 
-    val email: String? = null,
+    val email: String,
 
-    val address: AddressRequest? = null
+    val address: AddressRequest
 )
 
 data class AddressRequest(
     @field:NotNull
-    val street: String? = null,
+    val street: String,
 
     @field:NotNull
-    val district: String? = null,
+    val district: String,
 
     @field:NotNull
-    val city: String? = null,
+    val city: String,
 
     @field:NotNull
-    val state: String? = null,
+    val state: String,
 
     @field:NotNull
-    val number: String? = null,
+    val number: String,
 
     @field:NotNull
-    val cep: String? = null,
+    val cep: String,
 
-    val complement: String? = null
+    val complement: String
 )
