@@ -34,7 +34,7 @@ data class Client(
 
     val email: String? = null,
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     val address: Address
 ){
     @OneToMany(mappedBy = "client")

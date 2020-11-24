@@ -62,6 +62,6 @@ class ClientServiceImpl(
 
     private fun getClient(
         clientId: BigInteger
-    ): Client = clientRepository.findByIdOrNull(clientId)?: throw NotFoundException("Not found client id $clientId")
+    ): Client = clientRepository.findAllById(clientId)?: throw NotFoundException("Not found client id $clientId")
 
 }
