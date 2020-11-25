@@ -40,6 +40,9 @@ jobs:
           root: ./
           paths:
             - target/
+      - codecov/upload:
+          file: './coverage/clover.xml'
+          token: 525993e2-2a8f-44d9-b5c2-9560676cbf18
 
 workflows:
   version: 2
