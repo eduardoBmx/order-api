@@ -8,17 +8,17 @@ jobs:
   RunTest:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - run:
-          name: Run Tests
-          command: |
-            mvn test
+      - run: ./mvnw test
       - codecov/upload:
           file: './coverage/clover.xml'
           token: 525993e2-2a8f-44d9-b5c2-9560676cbf18
 
-  workflows:
-    maven_test:
-      jobs:
+workflows:
+   maven_test:
+     jobs:
         - RunTest
