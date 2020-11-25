@@ -1,7 +1,6 @@
 version: 2.1
 
 orbs:
-  maven: circleci/maven@1.0.3
   codecov: codecov/codecov@1.0.2
 
 jobs:
@@ -13,12 +12,16 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - run: ./mvnw test
+      - run:
+          name: run tests
+          command: |
+            mvn test
       - codecov/upload:
           file: './coverage/clover.xml'
           token: 525993e2-2a8f-44d9-b5c2-9560676cbf18
 
 workflows:
+  version: 2
   run-test:
     jobs:
       - RunTest
