@@ -9,7 +9,7 @@ jobs:
     steps:
       - codecov/upload:
           file: {{ coverage_report_filepath }}
-          token: 525993e2-2a8f-44d9-b5c2-9560676cbf18
+          token: ${CODECOV_TOKEN}
 
   workflows:
     maven_test:
