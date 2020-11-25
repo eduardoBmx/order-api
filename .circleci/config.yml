@@ -4,11 +4,20 @@ orbs:
   maven: circleci/maven@1.0.3
   codecov: codecov/codecov@1.0.2
 
+RunTest:
+  docker:
+    - image: circleci/openjdk:stretch
+  steps:
+    - checkout
+    - run:
+        name: Run Tests
+        command: |
+          mvn test
+    - codecov/upload:
+        file: './coverage/clover.xml'
+        token: 525993e2-2a8f-44d9-b5c2-9560676cbf18
+
   workflows:
     maven_test:
       jobs:
-        - maven/test:
-            command: '-X verify'
-        - codecov/upload:
-            file: {{ coverage_report_filepath }}
-            token: ${CODECOV_TOKEN}
+        - RunTest
