@@ -9,7 +9,11 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
+      - attach_workspace:
+          at: ./target
       - run: ./mvnw test
+      - store_artifacts:
+          path: target/site/jacoco/index.html
 
   build:
     docker:
@@ -30,6 +34,12 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
+      - checkout
+      - run: ./mvnw -Dmaven.test.skip=true package
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - target/
 
 workflows:
   version: 2
