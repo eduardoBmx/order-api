@@ -1,55 +1,18 @@
-version: 2.0
+version: 2.1
+
+orbs:
+  maven: circleci/maven@1.0.3
+  codecov: codecov/codecov@1.0.2
 
 jobs:
-  test:
-    docker:
-      - image: circleci/openjdk:stretch
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ./target
-      - run: ./mvnw test
-      - store_artifacts:
-          path: target/site/jacoco/index.html
-
   build:
-    docker:
-      - image: circleci/openjdk:stretch
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
-      - run: ./mvnw -Dmaven.test.skip=true package
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }} # appends cache key with a hash of pom.xml file
-            - v1-dependencies- # fallback in case previous cache key is not found
-      - run: ./mvnw -Dmaven.test.skip=true package
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-      - checkout
-      - run: ./mvnw -Dmaven.test.skip=true package
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - target/
       - codecov/upload:
-          file: './coverage/clover.xml'
+          file: {{ coverage_report_filepath }}
           token: 525993e2-2a8f-44d9-b5c2-9560676cbf18
 
-workflows:
-  version: 2
-
-  build-then-test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+  workflows:
+    maven_test:
+      jobs:
+        - maven/test:
+            command: '-X verify'
