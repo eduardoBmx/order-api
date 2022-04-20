@@ -29,17 +29,17 @@ class ClientServiceImpl(
         val client = getClient(clientId)
 
         addressRepository.save(client.address.copy(
-            number = clientRequest.address?.number!!,
-            cep = clientRequest.address.cep!!,
-            city = clientRequest.address.city!!,
+            number = clientRequest.address.number,
+            cep = clientRequest.address.cep,
+            city = clientRequest.address.city,
             complement = clientRequest.address.complement,
-            district = clientRequest.address.district!!,
-            state = clientRequest.address.state!!,
-            street = clientRequest.address.street!!
+            district = clientRequest.address.district,
+            state = clientRequest.address.state,
+            street = clientRequest.address.street
         ))
 
         return clientRepository.save(client.copy(
-            name = clientRequest.name!!,
+            name = clientRequest.name,
             phoneNumber = clientRequest.phoneNumber,
             email = clientRequest.email
         )).toResponse()
@@ -49,6 +49,7 @@ class ClientServiceImpl(
     override fun deleteClient(clientId: BigInteger) {
         val client = getClient(clientId)
         clientRepository.delete(client)
+        addressRepository.delete(client.address)
     }
 
     override fun listClient(page: Int, size: Int): PaginationClientResponse {
@@ -61,6 +62,6 @@ class ClientServiceImpl(
 
     private fun getClient(
         clientId: BigInteger
-    ): Client = clientRepository.findByIdOrNull(clientId)?: throw NotFoundException("Not found client id $clientId")
+    ): Client = clientRepository.findAllById(clientId)?: throw NotFoundException("Not found client id $clientId")
 
 }
