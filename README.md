@@ -1,6 +1,6 @@
 # Order Api
 
-sudo docker-compose up
+sudo docker-compose up 
 
 CRUD Product
 
